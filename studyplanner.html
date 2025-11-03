@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ZenStudy Planner Dashboard</title>
+  <link rel="stylesheet" href="studyplanner.css" />
+    <link rel="stylesheet" href="style.css">
+  <script src="scripts/auth.js"></script>
+</head>
+
+<body>
+  <!-- 🔒 Login Check -->
+  <script>
+    if (!isLoggedIn()) {
+      alert("Please log in to continue.");
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <!-- Navigation Bar -->
+   <nav class="navbar">
+  <div class="logo-section">
+    <img src="logowebsite.jpg" alt="Logo">
+    <h1>ZenStudy</h1>
+  </div>
+
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <li><a href="Zen Hacks.html">ZenHacks</a></li>
+    <a href="#">About</a>
+    <a href="#">Demo</a>
+  </div>
+
+    <div class="nav-buttons">
+      <a href="#" onclick="logout()">Logout</a>
+    </div>
+  </nav>
+
+ <main class="dashboard-container">
+  <!-- 🌈 Overview Section -->
+  <section class="overview">
+    <h2>Welcome back 👋</h2>
+    <p>Your smart study dashboard keeps everything organized in one place.</p>
+
+    <div class="stats-cards">
+      <div class="card">
+        <h3>Today’s Focus</h3>
+        <p>3 Tasks | 5 hrs</p>
+      </div>
+      <div class="card">
+        <h3>Weekly Progress</h3>
+        <p>65% Completed</p>
+      </div>
+      <div class="card">
+        <h3>Upcoming Deadlines</h3>
+        <p>2 Subjects Due</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 📚 Add Study Task Form -->
+  <section class="planner-input">
+    <h2>Add Study Task</h2>
+    <form id="studyForm">
+      <label>Subject Name:</label>
+      <input type="text" id="subject" placeholder="e.g. Mathematics" required>
+
+      <label>Deadline:</label>
+      <input type="date" id="deadline" required>
+
+      <label>Study Hours Needed:</label>
+      <input type="number" id="hours" min="1" max="24" placeholder="e.g. 3" required>
+
+      <label>Priority Level:</label>
+      <select id="priority">
+        <option value="high">High</option>
+        <option value="medium">Medium</option>
+        <option value="low">Low</option>
+      </select>
+
+      <button type="submit" class="add-btn">Add to Schedule</button>
+    </form>
+  </section>
+
+  <!-- 💡 Smart Task Recommendations -->
+<div class="recommendations">
+  <h3>💡 Smart Recommendations</h3>
+  <ul id="aiSuggestions"></ul>
+  <button onclick="generateSuggestions()">Refresh Suggestions 🔄</button>
+</div>
+
+
+  <!-- 🗓️ Study Schedule Table -->
+  <section class="schedule-section">
+    <h2>Generated Study Schedule</h2>
+    <table id="scheduleTable">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Deadline</th>
+          <th>Hours</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Dynamic rows appear here -->
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 📊 PHASE 4: Progress Dashboard -->
+<section class="progress-dashboard card">
+  <h2>📊 Your Progress Overview</h2>
+
+  <div class="summary-cards">
+    <div class="summary-item total">
+      <h3>Total Tasks</h3>
+      <p id="totalTasks">0</p>
+    </div>
+    <div class="summary-item completed">
+      <h3>Completed</h3>
+      <p id="completedTasks">0</p>
+    </div>
+    <div class="summary-item pending">
+      <h3>Pending</h3>
+      <p id="pendingTasks">0</p>
+    </div>
+  </div>
+
+  <div class="progress-bars">
+    <div class="progress-card">
+      <h3>Daily Progress</h3>
+      <div class="progress">
+        <div class="bar" id="dailyBar"></div>
+      </div>
+      <p id="dailyProgress">0 % completed</p>
+    </div>
+
+
+
+    <div class="progress-card">
+      <h3>Weekly Progress</h3>
+      <div class="progress">
+        <div class="bar" id="weeklyBar"></div>
+      </div>
+      <p id="weeklyProgress">0 % completed</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- 🏅 Gamified Progress System -->
+<section class="gamified-section">
+  <h2>🎯 Your Zen Progress</h2>
+  <div class="zen-stats">
+    <div class="points-card">
+      <h3>ZenPoints</h3>
+      <p id="zenPoints">0</p>
+    </div>
+
+    <div class="badges-card">
+      <h3>Unlocked Badges</h3>
+      <div class="badges-container" id="badgesContainer">
+        <p>No badges yet — complete your first task!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 🎉 Badge Popup Animation -->
+<div class="badge-popup" id="badgePopup">
+  <p>🏅 New Badge Unlocked!</p>
+  <span id="badgeName"></span>
+</div>
+
+<!-- 🌿 Growth Tree Visualization -->
+<section class="growth-tree-section">
+  <h2>Growth Tree Visualization</h2>
+  <p>Watch your Zen Tree grow as you complete your study goals 🌳</p>
+
+  <div class="growth-tree">
+    <img id="treeImage" src="tree1.png" alt="Growth Tree" />
+  </div>
+
+  <div class="growth-status">
+    <p id="growthMessage">Your journey has just begun — start completing tasks!</p>
+  </div>
+</section>
+
+</main>
+
+<!-- SMART FEATURES -->
+<section id="smart-features" class="smart-features">
+  <h2>⚡ Smart Features</h2>
+
+  <div class="features-grid">
+
+    <!-- AI Study Assistant -->
+    <div class="feature-card ai-assistant">
+      <h3>🧠 AI Study Assistant</h3>
+      <div class="chat-box">
+        <p><strong>You:</strong> how to study</p>
+        <p><strong>AI:</strong> Stay organized, study in short focused sessions, and take small breaks. You’ve got this! 💪</p>
+      </div>
+      <div class="input-row">
+        <input type="text" placeholder="Ask something like 'How to revise fast?'" />
+        <button>Ask</button>
+      </div>
+    </div>
+
+    <!-- Pomodoro Timer -->
+    <div class="feature-card pomodoro">
+      <h3>⏱ Pomodoro Timer</h3>
+      <div class="timer-display" id="timer">25:00</div>
+      <div class="timer-buttons">
+        <button id="start">Start</button>
+        <button id="pause">Pause</button>
+        <button id="reset">Reset</button>
+      </div>
+    </div>
+
+    <!-- Daily Motivation -->
+    <div class="feature-card motivation">
+      <h3>💬 Daily Motivation</h3>
+      <p id="motivation-text">Focus on progress, not perfection. 🌱</p>
+    </div>
+
+    <!-- Zen Mode -->
+    <div class="feature-card zen-mode">
+      <h3>🧘 Zen Mode</h3>
+      <p>Enter a calm, distraction-free environment to study peacefully.</p>
+      <button id="zenToggle">Activate Zen Mode</button>
+    </div>
+
+  </div>
+
+  <!-- Fullscreen Zen Focus Overlay -->
+  <div id="zenOverlay" class="zen-overlay">
+    <div class="zen-focus-content">
+      <h1>🌿 Focus Mode</h1>
+      <p>Take a deep breath. Let’s stay focused for 25 minutes.</p>
+      <button id="exitZen">Exit Zen Mode</button>
+    </div>
+  </div>
+</section>
+
+
+<!-- Floating AI Assistant Orb -->
+<div class="ai-orb" id="aiOrb" title="Chat with AI Assistant">
+  💬
+</div>
+
+<!-- AI Chat Popup -->
+<div class="chat-popup" id="chatPopup">
+  <div class="chat-header">AI Study Assistant</div>
+  <div class="chat-body" id="chatBody">
+    <p><b>Zen AI:</b> Hi there 👋 How can I help with your studies today?</p>
+  </div>
+  <div class="chat-footer">
+    <input type="text" id="userInput" placeholder="Ask something..." />
+    <button id="sendBtn">Send</button>
+  </div>
+</div>
+
+
+  </div>
+</section>
+
+
+
+<!-- 🗓️ PHASE 3: Interactive Calendar Section -->
+<section id="calendar-section" class="card">
+  <h2>🗓️ Study Calendar</h2>
+  <p class="calendar-note">Click on a date to view or add tasks. Drag events to reschedule!</p>
+  <div id="calendar"></div>
+</section>
+
+<!-- 📅 FullCalendar Library (Add before closing </body> tag) -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+<!-- 📜 JavaScript -->
+<script src="studyplanner.js"></script>
+
+<!-- ✅ SEO & Branding -->
+<meta name="description" content="ZenStudy – Smart Study Planner with AI Assistant, Pomodoro Timer, and Calendar Integration">
+<meta name="keywords" content="study planner, productivity, AI study assistant, pomodoro, student dashboard">
+<meta name="author" content="ZenStudy Team">
+<link rel="icon" type="image/png" href="favicon.png">
+
+<!-- ✅ Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<footer class="footer">
+  <p>🌸 ZenStudy © 2025 — Designed for focused learners.</p>
+  <p>Made with 💜 by Team </p>
+</footer>
+
+<!-- 🎊 Confetti Canvas -->
+<canvas id="confettiCanvas"></canvas>
+
+
+
+
+</body>
+</html>

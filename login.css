@@ -1,0 +1,103 @@
+/* ---------- GENERAL ---------- */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #A78BFA, #5EEAD4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* ---------- CONTAINER ---------- */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.login-box {
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  padding: 2.5rem 3rem;
+  width: 360px;
+  text-align: center;
+  animation: fadeIn 0.8s ease;
+}
+
+/* ---------- TEXT ---------- */
+.login-box h1 {
+  color: #6B21A8;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 0.95rem;
+  margin-bottom: 1.8rem;
+}
+
+/* ---------- INPUTS ---------- */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  border-color: #8B5CF6;
+  box-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
+  outline: none;
+}
+
+/* ---------- BUTTON ---------- */
+button {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #8B5CF6, #5EEAD4);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  box-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
+  transform: scale(1.03);
+}
+
+/* ---------- SIGNUP LINK ---------- */
+.signup-link {
+  margin-top: 1.2rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.signup-link a {
+  color: #8B5CF6;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.signup-link a:hover {
+  color: #5EEAD4;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}

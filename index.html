@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenStudy</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <nav class="navbar">
+  <div class="logo-section">
+    <img src="logowebsite.jpg" alt="Logo">
+    <h1>ZenStudy</h1>
+  </div>
+
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <li><a href="Zen Hacks.html">ZenHacks</a></li>
+    <a href="#">About</a>
+    <a href="#">Demo</a>
+  </div>
+
+  <div class="nav-buttons">
+  <a href="login.html" class="login-btn">Login</a>
+  <a href="signup.html" class="signup-btn">Sign Up</a>
+</div>
+
+</nav>
+
+<!--hero section-->
+
+<section class="hero">
+  <!-- SVG Animated Line Waves -->
+  <svg class="waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2">
+      <animate attributeName="d" dur="6s" repeatCount="indefinite"
+        values="
+        M0,160 Q360,240 720,160 T1440,160;
+        M0,180 Q360,100 720,180 T1440,180;
+        M0,160 Q360,240 720,160 T1440,160" />
+    </path>
+    <path fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2">
+      <animate attributeName="d" dur="8s" repeatCount="indefinite"
+        values="
+        M0,200 Q360,280 720,200 T1440,200;
+        M0,220 Q360,160 720,220 T1440,220;
+        M0,200 Q360,280 720,200 T1440,200" />
+    </path>
+  </svg>
+
+  <div class="content">
+    <h1>Plan Smarter. Study Better. <span>ZenStudy</span> Makes It Easy!</h1>
+    <p>Organize your subjects, track your progress, and stay motivated with personalized study plans crafted just for you.</p>
+    <button class="start-btn" onclick="handleStartPlanning()">Start Planning</button>
+
+  </div>
+</section>
+<!-- Hero Image Section -->
+<section class="hero-image">
+  <img src="webimg1.png" alt="Study Planner Illustration">
+</section>
+
+
+
+<!-- Journey Section -->
+<section class="journey">
+  <h2>How ZenStudy Creates Your Perfect Plan</h2>
+  <div class="journey-container">
+    
+    <div class="journey-card">
+      <h3>Add Your Subjects</h3>
+      <p>Start by entering your subjects and goals. ZenStudy begins understanding your academic focus.</p>
+      <img src="webimg2.png" alt="Add Subjects">
+    </div>
+
+    <div class="journey-card">
+      <h3>AI Understands You</h3>
+      <p>Our AI analyzes your input to personalize a smart study approach tailored to your learning style.</p>
+      <img src="webimg3.png" alt="AI Understands">
+    </div>
+
+    <div class="journey-card">
+      <h3>Plan is Ready</h3>
+      <p>In seconds, ZenStudy crafts a structured, balanced, and achievable study plan for your success.</p>
+      <img src="webimg4.png" alt="Plan Ready">
+    </div>
+
+    <div class="journey-card">
+      <h3>Track Your Progress</h3>
+      <p>Stay consistent and motivated — monitor your improvement with visual progress insights.</p>
+      <img src="webimg5.png" alt="Track Progress">
+    </div>
+
+  </div>
+  <p class="journey-tagline">✨ Your smart study journey begins here ✨</p>
+</section>
+
+<section class="testimonials">
+  <h2>What Our Users Say</h2>
+  <div class="testimonial-grid">
+    <!-- Repeatable testimonial cards -->
+    <div class="testimonial">
+      <div class="profile-pic"></div>
+      <div class="message">
+        “ZenStudy completely changed the way I focus while studying!”
+      </div>
+      <h3>– Priya Sharma</h3>
+    </div>
+
+    <div class="testimonial">
+      <div class="profile-pic"></div>
+      <div class="message">
+        “The relaxing sounds and clean design make me love studying again.”
+      </div>
+      <h3>– Aarav Patel</h3>
+    </div>
+
+    <div class="testimonial">
+      <div class="profile-pic"></div>
+      <div class="message">
+        “It keeps me motivated for long study sessions — perfect for students.”
+      </div>
+      <h3>– Sneha Reddy</h3>
+    </div>
+
+    <div class="testimonial">
+      <div class="profile-pic"></div>
+      <div class="message">
+        “Beautiful interface and smooth performance. Totally worth it!”
+      </div>
+      <h3>– Rahul Verma</h3>
+    </div>
+
+    <div class="testimonial">
+      <div class="profile-pic"></div>
+      <div class="message">
+        “Focus sessions with this app helped me finish my syllabus faster.”
+      </div>
+      <h3>– Kavya Iyer</h3>
+    </div>
+
+    <div class="testimonial">
+      <div class="profile-pic"></div>
+      <div class="message">
+        “The soft glow and calm colors feel magical during late-night study.”
+      </div>
+      <h3>– Arjun Mehta</h3>
+    </div>
+
+    <div class="testimonial">
+      <div class="profile-pic"></div>
+      <div class="message">
+        “ZenStudy is my favorite productivity tool. The sounds are amazing!”
+      </div>
+      <h3>– Nisha Rao</h3>
+    </div>
+
+    <div class="testimonial">
+      <div class="profile-pic"></div>
+      <div class="message">
+        “It feels like studying inside a calm ocean of focus.”
+      </div>
+      <h3>– Aditya Singh</h3>
+    </div>
+
+    <div class="testimonial">
+      <div class="profile-pic"></div>
+      <div class="message">
+        “Stylish, peaceful, and simple — exactly what every student needs.”
+      </div>
+      <h3>– Ananya Gupta</h3>
+    </div>
+
+    <div class="testimonial">
+      <div class="profile-pic"></div>
+      <div class="message">
+        “Everything glows softly — it makes me actually enjoy my workspace.”
+      </div>
+      <h3>– Rohan Das</h3>
+    </div>
+
+    <div class="testimonial">
+      <div class="profile-pic"></div>
+      <div class="message">
+        “I use ZenStudy every day before my exams. It really helps!”
+      </div>
+      <h3>– Meera Nair</h3>
+    </div>
+
+    <div class="testimonial">
+      <div class="profile-pic"></div>
+      <div class="message">
+        “The calm animations make me forget stress — brilliant idea!”
+      </div>
+      <h3>– Dev Kumar</h3>
+    </div>
+  </div>
+
+  <!-- Animated background -->
+  <div class="animated-waves">
+    <svg class="wave wave1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#A78BFA" />
+          <stop offset="100%" stop-color="#67E8F9" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#grad1)" fill-opacity="0.4" d="M0,100 C300,180 900,20 1200,100 L1200,200 L0,200 Z"></path>
+    </svg>
+
+    <svg class="wave wave2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="grad2" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#5EEAD4" />
+          <stop offset="100%" stop-color="#A78BFA" />
+        </linearGradient>
+      </defs>
+      <path fill="url(#grad2)" fill-opacity="0.25" d="M0,120 C400,200 800,40 1200,120 L1200,200 L0,200 Z"></path>
+    </svg>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about">
+  <div class="about-bg">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+  </div>
+
+  <div class="about-container">
+    <div class="about-image">
+      <img src="images/about-illustration.png" alt="ZenStudy Illustration">
+    </div>
+
+    <div class="about-text">
+      <h2>About ZenStudy</h2>
+      <p>
+        ZenStudy was built with one goal — to make learning smarter, calmer, and deeply personalized.
+        We blend the power of AI with proven study science to craft plans that <b>understand you</b>.
+        Whether you're revising for exams or exploring new topics, ZenStudy ensures your journey stays 
+        focused, balanced, and rewarding.
+      </p>
+
+      <div class="about-buttons">
+        <button class="btn-light">Our Mission</button>
+        <button class="btn-gradient">How It Works</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="mission" id="mission">
+  <div class="mission-container">
+    <div class="mission-text">
+      <h2>Our Mission</h2>
+      <p>
+        At <span>ZenStudy</span>, we’re on a mission to make studying smarter, calmer, and more joyful.  
+        We combine AI precision with human empathy to design personalized study journeys that spark focus and consistency — without stress.
+      </p>
+
+      <div class="mission-points">
+        <div class="point">
+          <i class="fas fa-bullseye"></i>
+          <span>Focus-driven Design</span>
+        </div>
+        <div class="point">
+          <i class="fas fa-brain"></i>
+          <span>AI-powered Learning</span>
+        </div>
+        <div class="point">
+          <i class="fas fa-heart"></i>
+          <span>Stress-free Growth</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mission-image">
+      <img src="webimg-mission.png" alt="Our Mission Illustration" />
+    </div>
+  </div>
+</section>
+
+<!-- Load authentication script -->
+<script src="scripts/auth.js"></script>
+
+<!-- Handle Start Planning button -->
+<script>
+  function handleStartPlanning() {
+    if (isLoggedIn()) {
+      // ✅ User is logged in → Go to Study Planner
+      window.location.href = "studyplanner.html";
+    } else {
+      // 🚫 User not logged in → Show alert + redirect
+      alert("Please log in or sign up to access your Study Planner!");
+      window.location.href = "login.html";
+    }
+  }
+</script>
+
+
+
+
+
+
+</body>
+</html>
