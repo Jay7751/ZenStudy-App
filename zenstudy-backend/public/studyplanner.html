@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZenStudy Planner Dashboard</title>
+    <link rel="stylesheet" href="studyplanner.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="enhancements.css">
+    <script src="scripts/auth-backend.js"></script>
+</head>
+<body>
+    <!-- Login Check -->
+    <script>
+        if (!isLoggedIn) {
+            alert('Please log in to continue.');
+            window.location.href = 'login.html';
+        }
+    </script>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo-section">
+            <img src="logowebsite.jpg" alt="Logo">
+            <h1>ZenStudy</h1>
+        </div>
+        <div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <li><a href="Zen-Hacks.html">Zen Hacks</a></li>
+                <a href="#">About</a>
+                <a href="#">Demo</a>
+            </div>
+            <div class="nav-buttons">
+                <a href="#" onclick="logoutUser()" class="logout-btn">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard-container">
+        <!-- Overview Section -->
+        <section class="overview">
+            <h2>Welcome back 👋</h2>
+            <p>Your smart study dashboard keeps everything organized in one place.</p>
+            <div class="stats-cards">
+                <div class="card">
+                    <h3>Today's Focus</h3>
+                    <p id="todayTasks">3 Tasks</p>
+                    <p id="todayHours">5 hrs</p>
+                </div>
+                <div class="card">
+                    <h3>Weekly Progress</h3>
+                    <p id="weeklyProgress">65% Completed</p>
+                </div>
+                <div class="card">
+                    <h3>Upcoming Deadlines</h3>
+                    <p id="upcomingDeadlines">2 Subjects Due</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Smart Recommendations -->
+        <div id="smart-recommendations"></div>
+
+        <!-- Add Study Task Section -->
+        <section class="add-task">
+            <h2>Add Study Task</h2>
+            <form id="studyForm">
+                <div class="form-group">
+                    <label for="subject">Subject:</label>
+                    <input type="text" id="subject" placeholder="e.g., Mathematics" required>
+                </div>
+                <div class="form-group">
+                    <label for="deadline">Deadline:</label>
+                    <input type="date" id="deadline" required>
+                </div>
+                <div class="form-group">
+                    <label for="hours">Study Hours:</label>
+                    <input type="number" id="hours" placeholder="e.g., 2" required>
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priority:</label>
+                    <select id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <button type="submit" class="add-btn">Add to Schedule</button>
+            </form>
+
+            <!-- Feature Buttons -->
+            <div class="feature-buttons" style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button onclick="displayAnalytics()" style="padding: 10px 20px; border-radius: 20px; background: linear-gradient(135deg, #8B5CF6, #A78BFA); color: white; border: none; cursor: pointer; font-weight: 600; font-family: Poppins, sans-serif; transition: transform 0.2s;">📊 Analytics</button>
+                
+                <button onclick="activateFocusMode(25)" style="padding: 10px 20px; border-radius: 20px; background: linear-gradient(135deg, #A78BFA, #5EEAD4); color: white; border: none; cursor: pointer; font-weight: 600; font-family: Poppins, sans-serif; transition: transform 0.2s;">🎯 Focus Mode</button>
+                
+                <button onclick="createQuickAddPanel()" style="padding: 10px 20px; border-radius: 20px; background: linear-gradient(135deg, #8B5CF6, #A78BFA); color: white; border: none; cursor: pointer; font-weight: 600; font-family: Poppins, sans-serif; transition: transform 0.2s;">⚡ Quick Add</button>
+                
+                <button onclick="exportStudyData()" style="padding: 10px 20px; border-radius: 20px; background: linear-gradient(135deg, #67E8F9, #5EEAD4); color: white; border: none; cursor: pointer; font-weight: 600; font-family: Poppins, sans-serif; transition: transform 0.2s;">💾 Export Data</button>
+            </div>
+        </section>
+
+        <!-- Generated Study Schedule -->
+        <section class="schedule">
+            <h2>Generated Study Schedule</h2>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Deadline</th>
+                        <th>Hours</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="scheduleTable"></tbody>
+            </table>
+        </section>
+
+        <!-- Progress Overview -->
+        <section class="progress-section">
+            <h2>📊 Your Progress Overview</h2>
+            <div class="progress-stats">
+                <div class="stat">
+                    <h3>Total Tasks</h3>
+                    <p id="totalTasks">0</p>
+                </div>
+                <div class="stat">
+                    <h3>Completed</h3>
+                    <p id="completedTasks">0</p>
+                </div>
+                <div class="stat">
+                    <h3>Pending</h3>
+                    <p id="pendingTasks">0</p>
+                </div>
+            </div>
+            <div class="progress-bars">
+                <div class="progress-item">
+                    <label>Daily Progress</label>
+                    <div class="progress-bar-bg">
+                        <div id="dailyBar" class="progress-bar" style="width: 0%"></div>
+                    </div>
+                    <span id="dailyPercent">0 % completed</span>
+                </div>
+                <div class="progress-item">
+                    <label>Weekly Progress</label>
+                    <div class="progress-bar-bg">
+                        <div id="weeklyBar" class="progress-bar" style="width: 0%"></div>
+                    </div>
+                    <span id="weeklyPercent">0 % completed</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Subject Performance -->
+        <div class="subject-performance"></div>
+
+        <!-- Zen Progress Section -->
+        <section class="zen-progress">
+            <h2>🎯 Your Zen Progress</h2>
+            <div class="zen-stats">
+                <div class="zen-card">
+                    <h3>ZenPoints</h3>
+                    <p id="zenPoints">0</p>
+                </div>
+                <div class="zen-card">
+                    <h3>Unlocked Badges</h3>
+                    <div id="badgesContainer">No badges yet — complete your first task!</div>
+                </div>
+            </div>
+            <div id="badgeNotification" class="badge-notification" style="display: none;">
+                <h3>🏅 New Badge Unlocked!</h3>
+                <p id="badgeMessage"></p>
+                <button onclick="this.parentElement.style.display='none'">Dismiss</button>
+            </div>
+        </section>
+
+        <!-- Growth Tree Section -->
+        <section class="growth-tree">
+            <h2>Growth Tree Visualization 🌳</h2>
+            <div class="tree-container">
+                <div id="treeStage">
+                    <p>Your journey has just begun — start completing tasks!</p>
+                </div>
+                <p id="treeMessage">Watch your Zen Tree grow as you complete your study goals 🌳</p>
+            </div>
+        </section>
+
+        <!-- Pomodoro Timer Section -->
+        <section class="pomodoro-section">
+            <h2>⏲️ Pomodoro Timer</h2>
+            <div class="timer-display">
+                <div id="timerDisplay">25:00</div>
+                <div class="timer-controls">
+                    <button onclick="startTimer()" class="timer-btn">Start</button>
+                    <button onclick="pauseTimer()" class="timer-btn">Pause</button>
+                    <button onclick="resetTimer()" class="timer-btn">Reset</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gamification Section -->
+        <section class="gamification">
+            <h2>🎮 Gamification</h2>
+            <div class="game-stats">
+                <div class="game-card">
+                    <h3>Current Streak</h3>
+                    <p id="currentStreak">0 days</p>
+                </div>
+                <div class="game-card">
+                    <h3>Total Achievements</h3>
+                    <p id="totalAchievements">0</p>
+                </div>
+                <div class="game-card">
+                    <h3>Best Day</h3>
+                    <p id="bestDay">N/A</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Calendar Section -->
+        <section class="calendar-section">
+            <h2>📅 Study Calendar</h2>
+            <div id="calendar"></div>
+        </section>
+
+        <!-- AI Assistant Section -->
+        <section class="ai-assistant">
+            <h2>🤖 AI Study Assistant</h2>
+            <div class="assistant-container">
+                <div id="assistantChat" class="chat-box" style="height: 300px; overflow-y: auto; border: 1px solid #ddd; border-radius: 12px; padding: 15px; background: #f9f9f9; margin-bottom: 15px;"></div>
+                <div class="chat-input">
+                    <input type="text" id="assistantInput" placeholder="Ask me anything about studying..." style="flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: Poppins, sans-serif;">
+                    <button onclick="sendAssistantMessage()" style="padding: 10px 20px; background: linear-gradient(135deg, #8B5CF6, #A78BFA); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-family: Poppins, sans-serif;">Send</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Daily Motivation Section -->
+        <section class="motivation">
+            <h2>💡 Daily Motivation</h2>
+            <div id="motivationQuote" class="quote-box" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(167, 139, 250, 0.1)); padding: 30px; border-radius: 15px; text-align: center; font-size: 1.2rem; font-weight: 500; color: #333; border-left: 5px solid #8B5CF6;">
+                Loading your daily dose of motivation...
+            </div>
+            <button onclick="location.reload()" style="margin-top: 15px; padding: 10px 20px; background: linear-gradient(135deg, #8B5CF6, #A78BFA); color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: 600; font-family: Poppins, sans-serif;">Get New Quote</button>
+        </section>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="scripts/api-connector.js"></script>
+    <script src="scripts/studyplanner-enhancements.js"></script>
+    <script src="navigation-handler.js"></script>
+    <script src="pomodoro-timer.js"></script>
+    <script src="ai-assistant.js"></script>
+
+</body>
+</html>
